@@ -1,0 +1,22 @@
+{% extends 'theme/base.html' %} {% load static %} {% block title %}
+<title> {{ block.super }} | Delete Account</title>
+{% endblock title %} {% block body %}
+<div class="mt-5 text-center" style="height: 78vh;">
+    <div class="mt-5 text-center">
+        <h3 class="font">
+            <b>
+                Do You want to Delete your Account ?
+            </b>
+        </h3><br>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-info font px-3">
+                <b>Yes</b>
+            </button>
+            <a href="/" class="btn btn-warning font px-3">
+                <b>No</b>
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,74 @@
+{% load static %}
+{% block style %}
+  <style>
+      /*  global classes */
+
+
+  </style>
+{% endblock style %}
+<nav>
+    <div class="nav-center">
+        <!-- nav header -->
+        <div class="nav-header">
+            <a href="{% url 'home' %}">
+                <img src='{% static "image/logo.svg" %}' class="logo" alt="logo" />
+            </a>
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- links -->
+        <ul class="links">
+            {% if not request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'home' %}">home</a>
+            </li>
+            <li>
+                <a href='{% url "about" %}'>about</a>
+            </li>
+            <li>
+                <a href='{% url "contact" %}'>contact us</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'home' %}">home</a>
+            </li>
+            <li>
+                <a href='{% url "add-post" %}'>add Post</a>
+            </li>
+            <li>
+                <a href='{% url "about" %}'>about</a>
+            </li>
+            <li>
+                <a href='{% url "contact" %}'>contact us</a>
+            </li>
+            {% endif %}
+        </ul>
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+            <div class="input-group">
+              <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+        </div>
+        
+        <!-- social media -->
+        <ul class="social-icons">
+            <div class="dropdown">
+                <img src='{% static "image/user.png" %}' class="rounded-circle z-depth-0" alt="avatar image" height="35" class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if not request.user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> | login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> | signup</a></li>
+                    {% else %}
+                    <li><a class="dropdown-item" href="{% url 'profile' request.user.username %}"><i class="fas fa-id-card"></i> | Profile | {{user.username}}</a></li><hr>
+                    <li><a class="dropdown-item" href="{% url 'setting' %}"><i class="fas fa-user-cog"></i> | setting</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> | logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>              
+    </ul>
+</div>
+</nav>

@@ -1,0 +1,51 @@
+{% extends "theme/base.html" %}
+{% load static %}
+{% block title %}
+  <title>
+      {{ block.super }} | Add Post
+  </title>
+  <script type="text/javascript" src='{% static "ckeditor/ckeditor-init.js" %}'></script>
+<script type="text/javascript" src='{% static "ckeditor/ckeditor/ckeditor.js" %}''></script>
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+    <form>
+        {% csrf_token %}
+          <label for="{{form.title.label}}">{{form.title.label}}</label>
+          {{form.title}}
+          <small id="{{form.title.label}}" class="form-text">
+          You can Add If You wnat Your style in Post.        
+        </small><br><br>
+        <label for="{{form.description.label}}">{{form.description.label}}</label><br>
+        <small id="{{form.description.label}}" class="form-text">
+        You can Add If You wnat Your style in Post.        
+        </small><br>
+          {{form.description}}
+            <div class="form-group col-md-4">
+                <label for="{{form.category.label}}">{{form.category.label}}</label><br>
+                {{form.category}}
+            </div><br>
+            <div class="form-group">
+              <label for="{{form.image.label}}">{{form.image.label}}</label><br>
+                {{form.image}}
+            </div><br>
+            <div class="form-group col-md-4">
+                <label for="{{form.body.label}}">{{form.body.label}}</label><br>
+                {{form.body}}
+            </div><br>
+            <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+</div>
+{% endblock body %}
+{% block javascript %}
+  <script>
+      $("#id_title").addClass('form-control')
+      $("#id_description").addClass('form-control')
+      $("textarea").css("height","92px")
+      $("#id_image").addClass('form-control-file')
+      $("#id_category").addClass('form-control')
+      $("#id_body").css("height","1000px")
+      $("#id_body").css("width","100%")
+  </script>
+{% endblock javascript %}

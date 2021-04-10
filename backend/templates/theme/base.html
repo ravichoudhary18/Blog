@@ -1,0 +1,56 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title -->
+        {% block title %}
+          Website
+        {% endblock title %}
+    <!-- Font-Awesome -->
+        <script src="https://kit.fontawesome.com/f46043ada8.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+        <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" 
+        crossorigin="anonymous">
+        <!-- CKEDITOR -->
+        <script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+        <link rel="stylesheet" 
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <!-- stylesheet -->
+        {% block style %}
+          
+        {% endblock style %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<!-- body -->
+<body>
+    {% include "theme/nav.html" %}
+    {% block body %}
+      
+    {% endblock body %}
+    {% include "theme/footer.html" %}
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" 
+    crossorigin="anonymous"></script>
+    <!-- javascript -->
+    <script src="{% static 'js/assit/jquery.waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/assit/jquery-3.5.1.slim.min.js' %}" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'js/assit/jquery-1.12.4.min.js' %}" charset="utf-8"></script>
+    {% block javascript %}
+      
+    {% endblock javascript %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="//cdn.ckeditor.com/4.15.1/basic/ckeditor.js"></script>
+    <script src='{% static "js/script.js" %}'></script>
+</body>
+</html>

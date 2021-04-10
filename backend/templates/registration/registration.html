@@ -1,0 +1,86 @@
+{% extends "theme/base.html" %}
+{% load static %}
+
+{% block title %}
+<title>
+  {{ block.super }} | Sign up
+</title>
+{% endblock title %}
+{% block style %}
+  
+<style>
+  body{
+    background-image: url('{% static "image/background.jpg" %}');
+    background-attachment: fixed;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  .bg-login{
+    margin-top:250px !important;
+    width:720px !important;
+    height:920px !important;
+  }
+</style>
+{% endblock style %}
+{% block body %}
+<section>
+  <div class="bg-login">
+    <form method="POST">
+      {% csrf_token %} {% if next %}
+      <input type="hidden" name="next" value="{{ next }}" /> {% endif %}
+      <div class="form-group">
+        <legend class="border-bottom mb-4 "><b>Sign Up</b></legend><br>
+        <div class="txtb" style="width: 48%; display:inline-block;">
+          {{form.first_name}}
+          <span data-placholder="{{form.first_name.label}}"></span>
+        </div>
+        <div class="txtb" style="width: 48%; display:inline-block;">
+          {{form.last_name}}
+          <span data-placholder="{{form.last_name.label}}"></span>
+        </div>
+        <div class="txtb" style="width: 48%; display:inline-block;">
+          {{form.username}}
+          <span data-placholder="{{form.username.label}}"></span>
+        </div>
+        <small class="text-muted">
+          {% if form.errors.username %}
+              <div class="alert alert-danger" role="alert">{{form.errors.username}}</div>
+          {% endif %}
+        </small>
+        <div class="txtb" style="width: 48%; display:inline-block;">
+          {{form.email}}
+          <span data-placholder="{{form.email.label}}"></span>
+        </div>
+        <small class="text-muted">
+          {% if form.errors.email %}
+              <div class="alert alert-danger" role="alert">{{form.errors.email}}</div>
+          {% endif %}
+        </small>
+        <div class="txtb" style="width: 48%; display:inline-block;">
+          {{form.password1}}
+          <span data-placholder="{{form.password1.label}}"></span>
+        </div>
+        <div class="txtb" style="width: 48%; display:inline-block;">
+          {{form.password2}}
+          <span data-placholder="{{form.password2.label}}"></span>
+        </div>
+      </div>
+      <small class="text-muted">
+        {% if form.errors.password1 %}
+        <div class="alert alert-danger" role="alert">{{form.errors.password1}}</div>
+        {% endif %}
+        {% if form.errors.password2 %}
+        <div class="alert alert-danger" role="alert">{{form.errors.password2}}</div>
+        {% endif %}
+        </small>
+      <div class="form-group">
+        <input type="submit" value="Sign Up" class="btn btn-primary">
+      </div>
+    </form><br>
+    <small>All ready user <a class="ml-3" href="{% url 'login' %}">Login</a></small><br>
+    <small>Forgot password <a class="ml-3" href="">reset</a></small>
+  </div>
+</section>
+<hr class="login-fix"><br><br><br><br><br><br><br>
+{% endblock body %}

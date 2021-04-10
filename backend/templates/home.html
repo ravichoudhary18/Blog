@@ -1,0 +1,123 @@
+{% extends "theme/base.html" %} {% block title %}
+<title>{{ block.super }} | Home</title>
+{% endblock title %} {% block style %}
+<style></style>
+{% endblock style %} {% block body %}
+<section class="menu">
+  <div class="title">
+    <h2>Our Category</h2>
+    <div class="underline"></div>
+  </div>
+  <!-- filter Button -->
+  <div class="btn-container">
+    <!-- <button class="filter-btn" data-id="all">All</button>
+      <button class="filter-btn" data-id="breakfast">Breakfast</button>
+      <button class="filter-btn" data-id="lunch">Lunch</button>
+      <button class="filter-btn" data-id="shakes">Shakes</button> -->
+  </div>
+  <!-- menu Item -->
+  <div class="section-center">
+    <!-- Single Item -->
+    <!-- <article class="menu-item">
+          <img src="menu-item.jpeg" class="photo" alt="menu item">
+          <div class="item-info">
+              <header>
+                  <h4>ButterMilk Pancakes</h4>
+                  <h4 class="price">$15</h4>
+              </header>
+              <p class="item-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos saepe deserunt
+                  consequatur perferendis voluptas asperiores facere aliquid nostrum fugit excepturi ipsum qui,
+                  ipsam iste odio. Voluptatum odio quas ipsum delectus?
+              </p>
+          </div>
+      </article> -->
+    <!-- End of single Item -->
+  </div>
+</section>
+{% endblock body %} {% block javascript %}
+<script language="javascript">
+
+  const menu = [
+    {% for blog in object_list %}
+      {
+        id: {{ blog.id }},
+        user: "{{blog.user}}",
+        title: "{{blog.title | safe}}",
+        description : "{{blog.description | safe}}",
+        body: `{{blog.body |striptags | truncatewords:20}}`,
+        img : "{{blog.image.url}}",
+        category : "{{blog.category}}",
+        slug : "{{blog.slug}}",
+        views_count: {{ blog.views_count }},
+      },
+  {% endfor %}
+  ];
+
+    const sectionCenter = document.querySelector(".section-center");
+    const container = document.querySelector(".btn-container")
+
+
+    window.addEventListener("DOMContentLoaded", () => {
+      displayMenuItem(menu);
+      displayMenuButtion();
+    });
+
+    function displayMenuItem(menuItems) {
+      let displayMenu = menuItems.map((item) => {
+        // console.log(itme)
+        return `
+        <a href="/${item.slug}">
+        <article class="menu-item">
+            <img src=${item.img} class="photo" alt="${item.img}">
+            <div class="item-info">
+              <header>
+                <h4>${item.title}</h4>
+                <h4 class="price">view: ${item.views_count}</h4>
+              </header>
+              <p class="item-text">${item.body}
+              </p>
+              <h4 class="price">by ${item.user}</h4>
+            </div>
+          </article>
+        </a>`
+    });
+
+      displayMenu = displayMenu.join("");
+      sectionCenter.innerHTML = displayMenu;
+    }
+
+
+    function displayMenuButtion() {
+      const categories = menu.reduce((value, item) => {
+        if (!value.includes(item.category)) {
+          value.push(item.category);
+        }
+        return value;
+      }, ['all']
+      );
+      const categoryBtns = categories.map((category) => {
+        return `<button class="filter-btn" data-id="${category}">${category}</button>`;
+      })
+        .join("");
+      container.innerHTML = categoryBtns;
+      // console.log(categoryBtns);
+      const filterBtn = container.querySelectorAll(".filter-btn");
+      filterBtn.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const category = e.currentTarget.dataset.id;
+          const menuCategory = menu.filter((menuItem) => {
+            if (menuItem.category === category) {
+              return menuItem
+            }
+          });
+          if (category === "all") {
+            return displayMenuItem(menu);
+          }
+          else {
+            return displayMenuItem(menuCategory)
+          }
+        });
+      });
+    }
+</script>
+{% endblock javascript %}

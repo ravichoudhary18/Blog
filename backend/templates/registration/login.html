@@ -1,0 +1,64 @@
+{% extends "theme/base.html" %}
+{% load static %}
+<!-- title -->
+{% block title %}
+<title>
+    {{ block.super }}| login
+</title>
+{% endblock title %}
+<!-- stylesheet -->
+{% block style %}
+<style>
+    .fab{
+        float:right;
+    }
+    body{
+        background-image: url('{% static "image/background.jpg" %}');
+        background-attachment: fixed;
+        background-size:cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+{% endblock style %}
+<!-- body -->
+{% block body %}
+<section>
+<div class="bg-login mt-3">
+    <form method="POST">
+        {% csrf_token %} {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" /> {% endif %}
+        <div class="form-group">
+            <legend class="border-bottom mb-4 "><b>Login</b></legend><br>
+            <div class="txtb">
+                {{form.username}}
+                <span data-placholder="{{form.username.label}}"></span>
+            </div>
+
+            <div class="txtb">
+                {{form.password}}
+                
+                <span data-placholder="{{form.password.label}}"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary">
+        </div>
+    </form>
+    <br>
+    <small>Join .com? <a class="ml-3" href="{% url 'signup' %}">Signup</a></small><br>
+    <small>Forgot password <a class="ml-3" href="{% url 'password_reset' %}">reset</a></small>
+</div>
+<div class="container">
+    {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+    <p class="alert alert-danger" role="alert">{{ error }}</p>
+    {% endfor %} {% endif %}
+</div>
+</section><hr class="login-fix">
+
+<!-- <hr class="login-fix"> -->
+{% endblock body %}
+<!-- javascript -->
+{% block javascript %}
+
+{% endblock javascript %}
