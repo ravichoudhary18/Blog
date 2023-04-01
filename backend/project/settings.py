@@ -152,7 +152,7 @@ LOGOUT_URL = 'login'
 # ACCOUNT_ACTIVATION_DAYS = 1
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'fycssem2@gmail.com'
+EMAIL_HOST_USER = email
 EMAIL_HOST_PASSWORD = passwoord
 EMAIL_PORT = 587
 
