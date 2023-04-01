@@ -153,7 +153,7 @@ LOGOUT_URL = 'login'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'fycssem2@gmail.com'
-EMAIL_HOST_PASSWORD = '8425009942'
+EMAIL_HOST_PASSWORD = passwoord
 EMAIL_PORT = 587
 
 ###################################
